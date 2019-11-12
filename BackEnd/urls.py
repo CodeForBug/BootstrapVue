@@ -12,4 +12,5 @@ urlpatterns = [
     path('booksamount/', views.get_amount_of_books),
     path('moviesamount/', views.get_amount_of_movies),
     path('first/addbook/', views.add_book),
+    path('first/getbooklist/', views.get_book_list),
 ]
