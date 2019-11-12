@@ -175,60 +175,19 @@
                     </div><!--/.box-head-->
                     <div class="item">
                         <div class="item-responsive ">
-                            <table id="table" class="table">
+                            <table id="table" class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>ID#</th>
-                                    <th>Product Name</th>
-                                    <th>Dealer</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
+                                    <th>书籍编号</th>
+                                    <th>书籍名称</th>
+                                    <th>作者</th>
+                                    <th>出版社</th>
+                                    <th>类型</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead><!--/thead-->
-                                <tbody>
-                                <tr>
-                                    <td><a href="#">1</a></td>
-                                    <td>Samsung Galaxy S8</td>
-                                    <td>Shamsu</td>
-                                    <td>$25050</td>
-                                    <td>185</td>
-                                    <td>
-                                        <span class="item-status delivered">Delivered</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">2</a></td>
-                                    <td>Samsung Galaxy S8</td>
-                                    <td>Shamsu</td>
-                                    <td>$25050</td>
-                                    <td>185</td>
-                                    <td><span class="item-status cancel">Cancel</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">3</a></td>
-                                    <td>Samsung Galaxy S8</td>
-                                    <td>Shamsu</td>
-                                    <td>$25050</td>
-                                    <td>185</td>
-                                    <td><span class="item-status delivered">Delivered</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">4</a></td>
-                                    <td>Samsung Galaxy S8</td>
-                                    <td>Shamsu</td>
-                                    <td>$25050</td>
-                                    <td>185</td>
-                                    <td><span class="item-status cancel">Cencel</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">5</a></td>
-                                    <td>Samsung Galaxy S8</td>
-                                    <td>Shamsu</td>
-                                    <td>$25050</td>
-                                    <td>185</td>
-                                    <td><span class="item-status delivered">Delivered</span></td>
-                                </tr>
+                                <tbody id="bookList">
                                 </tbody><!--/tbody-->
                             </table><!--/.table-->
                         </div><!--/.table-responsive-->
@@ -238,23 +197,7 @@
         </div><!--/.row-->
 
         <nav aria-label="Page navigation" style="text-align: center">
-            <ul class="pagination" id="Pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
+            <ul class="pagination" id="Pagination"></ul>
         </nav>
     </div>
     <!-- END MAIN -->
@@ -312,6 +255,9 @@
 
 <!--jquery-1.12.4.min.js-->
 <script src="../../static/js/jquery.min.js"></script>
+
+<!--bootstrap-paginator.js-->
+<script src="../../static/js/bootstrap-paginator.js"></script>
 
 <!--bootstrap.min.js-->
 <script src="../../static/js/bootstrap.min.js"></script>

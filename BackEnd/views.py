@@ -1,8 +1,8 @@
 from django.shortcuts import render
 import json
-from django.http import HttpResponse,JsonResponse
+import math
+from django.http import HttpResponse
 from BackEnd.models import Books, Movies
-from django.core import serializers
 
 from django.conf import settings
 # Create your views here.
@@ -93,13 +93,14 @@ def add_book(request):
 
 
 def get_book_list(request):
-    if request.method == 'GET':
-        pn = request.GET.get('pn')
-        start = int(pn)*10
-        end = (int(pn)+1)*10
+    if request.method == 'POST':
+        pn = request.POST.get('page', 1)
+        start = (int(pn)-1)*10
+        end = int(pn)*10
         book_list = []
         try:
             books = Books.objects.all()[start:end]
+            pages = math.ceil(Books.objects.all().count() / 10)
             for book in books:
                 book_dict = {}
                 book_dict["pk"] = book.pk
@@ -112,7 +113,11 @@ def get_book_list(request):
                 book_list.append(book_dict)
             result = {
                 "status": 200,
-                "data": book_list,
+                "data": {
+                    "pageCount": pages,
+                    "currentPage": pn,
+                    "bookList": book_list
+                },
                 "msg": "success"
             }
         except Exception as e:
