@@ -81,8 +81,9 @@ def add_book(request):
         booktype = request.POST.get('booktype')
         bookpress = request.POST.get('bookpress')
         save_path = '%s/book/%s' % (settings.MEDIA_ROOT, file.name)
+        url = request.get_host()+"/media/book/"+file.name
         Books.objects.create(book_name=bookname, book_author=bookauthor, book_press=bookpress,
-                             book_category=booktype, book_url=save_path)
+                             book_category=booktype, book_url=url)
         with open(save_path, 'wb') as f:
             if file.multiple_chunks():
                 for myf in file.chunks():
@@ -94,16 +95,16 @@ def add_book(request):
 
 def get_book_list(request):
     if request.method == 'POST':
-        pn = request.POST.get('page', 1)
-        start = (int(pn)-1)*10
-        end = int(pn)*10
+        pn = request.POST.get('offset')[0]
+        start = int(pn) * 10
+        end = (int(pn) + 1) * 10
         book_list = []
         try:
             books = Books.objects.all()[start:end]
-            pages = math.ceil(Books.objects.all().count() / 10)
+            total = Books.objects.all().count()
             for book in books:
                 book_dict = {}
-                book_dict["pk"] = book.pk
+                book_dict["id"] = book.pk
                 book_dict["name"] = book.book_name
                 book_dict["category"] = book.book_category
                 book_dict["author"] = book.book_author
@@ -114,10 +115,30 @@ def get_book_list(request):
             result = {
                 "status": 200,
                 "data": {
-                    "pageCount": pages,
+                    "total": total,
                     "currentPage": pn,
                     "bookList": book_list
                 },
+                "msg": "success"
+            }
+        except Exception as e:
+            result = {
+                "status": 0,
+                "data": {},
+                "msg": e
+            }
+        return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def delete_book_by_id(request):
+    if request.method == 'POST':
+        pk = request.POST.getlist('id')
+        try:
+            for i in pk:
+                Books.objects.filter(pk=int(i)).delete()
+            result = {
+                "status": 200,
+                "data": {},
                 "msg": "success"
             }
         except Exception as e:

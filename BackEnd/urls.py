@@ -13,4 +13,5 @@ urlpatterns = [
     path('moviesamount/', views.get_amount_of_movies),
     path('first/addbook/', views.add_book),
     path('first/getbooklist/', views.get_book_list),
+    path('first/deletebook/', views.delete_book_by_id)
 ]
